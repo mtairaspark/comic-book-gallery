@@ -1,7 +1,22 @@
-﻿
+﻿@model ComivBookGallery.Models.ComicBook[]
+
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Comic Books";
 }
 
-<h2>Index</h2>
+<h2>Viewbag.Title</h2>
 
+<div class="row">
+
+    @foreach (var comic in Model)
+    {
+        <div class="col-md-3">
+            <h4>@comic.DisplayText</h4>
+            <img src="/Images/@comic.CoverImageFile"
+                 alt="The Amazing Spider-Man #700"
+                 class="img-responsive" />
+
+        </div>
+    }
+</div>
+    
