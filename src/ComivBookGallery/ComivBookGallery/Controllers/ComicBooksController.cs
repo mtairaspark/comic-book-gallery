@@ -1,4 +1,5 @@
-﻿using ComivBookGallery.Models;
+﻿using ComivBookGallery.Data;
+using ComivBookGallery.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +10,20 @@ namespace ComivBookGallery.Controllers
 {
     public class ComicBooksController : Controller
     {
-        public ActionResult Detail()
-        {
-            
-            return View(comicBook);
+        private ComicBookRepository _comicBookRepository = null;
 
+        public ComicBooksController()
+        {
+            _comicBookRepository = new ComicBookRepository();
+        }
+        public ActionResult Detail(int? id)
+        {
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+            var comicBook = _comicBookRepository.GetComicBook((int)id);
+            return View(comicBook);
         }
     }
 }
